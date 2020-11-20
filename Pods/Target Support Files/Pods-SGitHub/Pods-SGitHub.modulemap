@@ -1,0 +1,6 @@
+framework module Pods_SGitHub {
+  umbrella header "Pods-SGitHub-umbrella.h"
+
+  export *
+  module * { export * }
+}

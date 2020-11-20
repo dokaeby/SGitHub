@@ -1,0 +1,6 @@
+framework module Pods_SGitHubTests {
+  umbrella header "Pods-SGitHubTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

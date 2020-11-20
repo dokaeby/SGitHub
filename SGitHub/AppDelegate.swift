@@ -10,10 +10,15 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static var shared: AppDelegate? {
+        return UIApplication.shared.delegate as? AppDelegate
+    }
 
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupKeyWindow()
         return true
     }
 
@@ -34,3 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+    private func setupKeyWindow() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+//        let allUserViewController = ProvideObject.allUser.viewController
+//        let navigationController = UINavigationController(rootViewController: allUserViewController)
+//        window?.rootViewController = navigationController
+        window?.backgroundColor = .white
+        window?.makeKeyAndVisible()
+    }
+}

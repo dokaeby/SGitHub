@@ -1,6 +1,0 @@
-framework module Pods_SGitHubUITests {
-  umbrella header "Pods-SGitHubUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

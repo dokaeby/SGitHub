@@ -1,0 +1,17 @@
+//
+//  SGitHub-prefix.pch
+//  SGitHub
+//
+//  Created by 양성훈 on 2020/11/20.
+//
+
+#ifndef SGitHub_prefix_h
+#define SGitHub_prefix_h
+
+import RxSwift
+import RxCocoa
+import RxDataSources
+import SnapKit
+import Then
+
+#endif /* SGitHub_prefix_h */

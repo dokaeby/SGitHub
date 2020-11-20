@@ -1,9 +1,11 @@
-#Uncomment the next line to define a global platform for your project
+# Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
 
-use_frameworks!
-inhibit_all_warnings!
-
+target 'SGitHub' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  inhibit_all_warnings!	
+  # Pods for SGitHub
   # RX
   pod 'RxSwift', '~> 5.0'
   pod 'RxCocoa', '~> 5.0'
@@ -30,11 +32,9 @@ inhibit_all_warnings!
   # UI
   pod 'SnapKit', '~> 4.0.0'
   pod 'SkeletonView'
-
-  # Indicator
+  pod 'Then'
   pod 'NVActivityIndicatorView'
-
-#  pod 'Hero'
+  pod 'Hero'
 
   # Tools
   pod 'R.swift', '~> 5.0'  # https://github.com/mac-cain13/R.swift
@@ -51,49 +51,18 @@ inhibit_all_warnings!
   pod 'DateToolsSwift', '~> 5.0'  # https://github.com/MatthewYork/DateTools
   pod 'SwiftDate', '~> 6.0'  # https://github.com/malcommac/SwiftDate
 
-
-target 'SGitHub' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-end
-
-target 'SGitHubTests' do
-  # Pods for SGitHub testing
+  target 'SGitHubTests' do
+    inherit! :search_paths
+    # Pods for testing
   pod 'Quick', '~> 3.0'  # https://github.com/Quick/Quick
   pod 'Nimble', '~> 8.0'  # https://github.com/Quick/Nimble
   pod 'RxAtomic', :modular_headers => true
   pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
+
+  end
+
+  target 'SGitHubUITests' do
+    # Pods for testing
+  end
+
 end
-
-target 'SGitHubUITests' do
-  # Pods for SGitHub testing
-  pod 'Quick', '~> 3.0'  # https://github.com/Quick/Quick
-  pod 'Nimble', '~> 8.0'  # https://github.com/Quick/Nimble
-  pod 'RxAtomic', :modular_headers => true
-  pod 'RxBlocking'  # https://github.com/ReactiveX/RxSwift
-end
-
-post_install do |installer|
-    # Cocoapods optimization, always clean project after pod updating
-    Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
-        flag_name = File.basename(script, ".sh") + "-Installation-Flag"
-        folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-        file = File.join(folder, flag_name)
-        content = File.read(script)
-        content.gsub!(/set -e/, "set -e\nKG_FILE=\"#{file}\"\nif [ -f \"$KG_FILE\" ]; then exit 0; fi\nmkdir -p \"#{folder}\"\ntouch \"$KG_FILE\"")
-        File.write(script, content)
-    end
-    
-    # Enable tracing resources
-    installer.pods_project.targets.each do |target|
-      if target.name == 'RxSwift'
-        target.build_configurations.each do |config|
-          if config.name == 'Debug'
-            config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['-D', 'TRACE_RESOURCES']
-            config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'Yes'
-          end
-        end
-      end
-    end
-end
-
-
